@@ -1,12 +1,17 @@
 Package: delemr
-Title: What the Package Does (One Line, Title Case)
+Title: Maël Delem's R code
 Version: 0.0.0.9000
 Authors@R: 
-    person("First", "Last", , "first.last@example.com", role = c("aut", "cre"),
-           comment = c(ORCID = "YOUR-ORCID-ID"))
-Description: What the package does (one paragraph).
-License: `use_mit_license()`, `use_gpl3_license()` or friends to pick a
-    license
+    person("Maël", "Delem", , "mael.a.delem@gmail.com", role = c("aut", "cre"),
+           comment = c(ORCID = "0009-0005-8518-1991"))
+Description: Miscellaneous R functions developed in personal projects.
+License: MIT + file LICENSE
+Imports: 
+    dplyr,
+    glue,
+    lifecycle,
+    rlang,
+    stats
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.3.2
