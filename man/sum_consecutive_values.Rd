@@ -13,7 +13,9 @@ sum_consecutive_values(x)
 A vector where consecutive non-null numeric values have been summed.
 }
 \description{
-Function to sum  non-null consecutive numeric values in a vector containing zeros. Multiple successive numbers are all replaced with their sum and all zeros are removed.
+Function to sum  non-null consecutive numeric values in a vector containing
+zeros. Multiple successive numbers are all replaced with their sum and all
+zeros are removed.
 }
 \examples{
 sum_consecutive_values(c(1, 2, 0, 0, 3, 4, 0, 0, 0, 4, 3))

@@ -2,31 +2,55 @@
 % Please edit documentation in R/pipe-friends.R
 \name{define_contrasts}
 \alias{define_contrasts}
+\alias{def_contr}
 \title{Define contrasts inside a pipeline}
 \usage{
-define_contrasts(df, col, contrast)
+define_contrasts(df, cols, contrasts)
 }
 \arguments{
 \item{df}{A dataframe.}
 
-\item{col}{A column name.}
+\item{cols}{A vector of column names, e.g., \code{c(group, condition)}.}
 
-\item{contrast}{A matrix of contrasts.}
+\item{contrasts}{A list of contrasts, each specified either:
+\itemize{
+\item as a vector, e.g., \code{c(-1, 1)} for a two-level factor
+\item as a matrix, e.g., \code{contr.sum(3)} for a three-level factor
+}}
 }
 \value{
-A dataframe with the contrasts defined.
+A dataframe with the contrasts defined for the supplied columns.
 }
 \description{
-Short wrapper around the \code{contrasts} function to define contrasts inside a pipeline easily. The function takes a dataframe as input and returns a dataframe with updated contrasts, allowing to pipe it, which differs from the usual use of the \code{contrasts} function.
+Short wrapper around the \link[stats:contrasts]{stats::contrasts<-} function to define
+contrasts inside a pipeline easily. The function takes a dataframe as input
+and returns a dataframe with updated contrasts, allowing to pipe it, which
+differs from the usual use of the \verb{contrasts<-} function.
 }
 \examples{
-df <- data.frame(group = factor(rep(c("A", "B", "C"), 3)))
+df <- data.frame(
+  group = factor(rep(c("A", "B"), 3)),
+  condition = factor(rep(c("X", "Y", "Z"), each = 2))
+  )
 
 # The usual way
-contrasts(df$group) <- contr.sum(3)
-
-# the pipeline way
-df <- df |> define_contrasts(group, contr.sum(3))
+contrasts(df$group) <- contr.sum(2)
+contrasts(df$condition) <- contr.sum(3)
 
 contrasts(df$group)
+contrasts(df$condition)
+
+# the pipeline way
+df <- df |>
+  define_contrasts(
+    c(group, condition),
+    c(contr.sum(2), contr.sum(3)
+    )
+
+contrasts(df$group)
+contrasts(df$condition)
+
+}
+\seealso{
+\link[stats:contrasts]{stats::contrasts<-} which this function wraps.
 }

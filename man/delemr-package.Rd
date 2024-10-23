@@ -6,7 +6,7 @@
 \alias{delemr-package}
 \title{delemr: Maël Delem's R code}
 \description{
-Miscellaneous R functions developed in my personal projects.
+Miscellaneous R functions developed in my personal projects. The functions here only have in common that they have been useful to me at some point, but they should be well documented if you're curious about them.
 }
 \author{
 \strong{Maintainer}: Maël Delem \email{mael.a.delem@gmail.com} (\href{https://orcid.org/0009-0005-8518-1991}{ORCID})
