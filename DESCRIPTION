@@ -2,11 +2,15 @@ Package: delemr
 Title: Maël Delem's R code
 Version: 0.0.0.9000
 Authors@R: 
-    person("Maël", "Delem", , "mael.a.delem@gmail.com", role = c("aut", "cre"),
-           comment = c(ORCID = "0009-0005-8518-1991"))
-Description: Miscellaneous R functions developed in personal projects.
-License: MIT + file LICENSE
+    person(
+    "Maël", "Delem",
+    email = "mael.a.delem@gmail.com", 
+    role = c("aut", "cre"),
+    comment = c(ORCID = "0009-0005-8518-1991"))
+Description: Miscellaneous R functions developed in my personal projects.
+License: GPL (>= 3) + file LICENSE
 Imports: 
+    crayon,
     dplyr,
     glue,
     lifecycle,
@@ -15,3 +19,6 @@ Imports:
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.3.2
+Suggests: 
+    testthat (>= 3.0.0)
+Config/testthat/edition: 3
