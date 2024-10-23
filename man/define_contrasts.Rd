@@ -10,7 +10,7 @@ define_contrasts(df, cols, contrasts)
 \arguments{
 \item{df}{A dataframe.}
 
-\item{cols}{A vector of column names, e.g., \code{c(group, condition)}.}
+\item{cols}{A vector of column names (quoted or not), e.g., \code{c(group, condition)}.}
 
 \item{contrasts}{A list of contrasts, each specified either:
 \itemize{
@@ -31,7 +31,7 @@ differs from the usual use of the \verb{contrasts<-} function.
 df <- data.frame(
   group = factor(rep(c("A", "B"), 3)),
   condition = factor(rep(c("X", "Y", "Z"), each = 2))
-  )
+)
 
 # The usual way
 contrasts(df$group) <- contr.sum(2)
@@ -43,9 +43,9 @@ contrasts(df$condition)
 # the pipeline way
 df <- df |>
   define_contrasts(
-    c(group, condition),
-    c(contr.sum(2), contr.sum(3)
-    )
+    cols = c(group, condition),
+    contrasts = list(contr.sum(2), contr.sum(3))
+  )
 
 contrasts(df$group)
 contrasts(df$condition)

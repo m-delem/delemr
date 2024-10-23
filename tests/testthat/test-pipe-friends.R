@@ -1,26 +1,55 @@
 test_that("contrasts are defined correctly", {
-  df1 <- data.frame(x = factor(rep(c("a", "b", "c"), 3)))
+  df <-
+    data.frame(
+      group = factor(rep(c("A", "B"), each = 3)),
+      condition = factor(rep(c("X", "Y", "Z"), each = 2))
+    )
 
-  df2 <- df1 |> define_contrasts(col = x, contr.sum(3))
+  df2 <-
+    df |>
+    define_contrasts(
+      cols = c(group, condition),
+      contrasts = list(contr.sum(2), contr.sum(3))
+    )
 
-  contrasts(df1$x) <- contr.sum(3)
+  contrasts(df$group) <- contr.sum(2)
+  contrasts(df$condition) <- contr.sum(3)
 
-  expect_equal(contrasts(df1$x), contrasts(df2$x))
-  expect_setequal(contrasts(df2$x),contr.sum(3))
-
-  # alias works properly
-  expect_equal(
-    df1 |> define_contrasts(col = x, contr.sum(3)),
-    df1 |> def_contr(col = x, contr.sum(3))
-  )
+  expect_equal(contrasts(df$group), contrasts(df2$group))
+  expect_equal(contrasts(df$condition), contrasts(df2$condition))
 })
 
 test_that("relevant errors are thrown when expected", {
-  df1 <- data.frame(x = factor(rep(c("a", "b", "c"), 3)))
+  df <-
+    data.frame(
+      group = factor(rep(c("A", "B"), each = 3)),
+      condition = factor(rep(c("X", "Y", "Z"), each = 2))
+      )
 
-  expect_error(define_contrasts(df = c(1)), "First argument")
-  expect_error(define_contrasts(df1, col = y), "Second argument")
-  expect_error(define_contrasts(df1, col = x, c(-1, 1)), "contrast vector")
-  expect_error(define_contrasts(df1, col = x, contr.sum(2)), "contrast matrix")
+  expect_error(define_contrasts(df = c(1)), "must be a dataframe")
+  expect_error(define_contrasts(df, cols = y), "must be a vector of column names")
+  expect_error(
+    define_contrasts(df, col = c(group, condition), contrasts = c(-1, 1)),
+    "must be a list"
+  )
+  expect_error(
+    define_contrasts(df, col = c(group, condition), contrasts = list("a", c(1))),
+    "must contain only numerical vectors or matrices"
+  )
+  expect_error(
+    define_contrasts(
+      df,
+      col = c(group, condition),
+      contrasts = list(c(-1), contr.sum(3))
+    ),
+    "must match the number of factor levels"
+  )
+  expect_error(
+    define_contrasts(
+      df,
+      col = c(group, condition),
+      contrasts = list(c(-1, 1), contr.sum(2))
+    ),
+    "must match the number of factor levels"
+  )
 })
-
