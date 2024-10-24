@@ -40,9 +40,9 @@ in the `man/figures` folder of the package.
 #| fig.alt: >
 #|   Raw image of my drawing.
 
-image_path <- "man/figures/delemr_drawing.png"
-stick_path <- "man/figures/delemr_sticker.png"
-logo_path  <- "man/figures/logo.png"
+image_path <- "../../man/figures/delemr_drawing.png"
+stick_path <- "../../man/figures/delemr_sticker.png"
+logo_path  <- "../../man/figures/logo.png"
 
 ggplot() + 
   geom_from_path(aes(.5, .5, path = image_path)) +
@@ -111,7 +111,7 @@ ggsave(
 
 # displaying the saved image
 ggplot() + 
-  geom_from_path(aes(.5, .5, path = here(stick_path))) +
+  geom_from_path(aes(.5, .5, path = stick_path)) +
   scale_x_continuous(limits = c(0, 1), expand = c(0, 0)) +
   scale_y_continuous(limits = c(0, 1), expand = c(0, 0)) +
   theme_void()
