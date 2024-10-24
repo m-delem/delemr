@@ -79,7 +79,9 @@
     
     
 <p>Quick article to document the process of creating a sticker for this
-package (which I initially did for fun and learning purposes).</p>
+package (which I initially did for fun and learning purposes). I use the
+<code>pacman</code> package in my setup to conveniently check if
+installed/install/load the necessary packages, all in one go.</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw">if</span> <span class="op">(</span><span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/ns-load.html" class="external-link">requireNamespace</a></span><span class="op">(</span><span class="st">"pacman"</span>, quietly <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span></span>
 <span>  <span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="st">"pacman"</span><span class="op">)</span></span>
@@ -88,14 +90,13 @@ package (which I initially did for fun and learning purposes).</p>
 <span><span class="co">#&gt; (as 'lib' is unspecified)</span></span>
 <span><span class="co">#&gt; also installing the dependency 'remotes'</span></span>
 <span></span>
-<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/trinker/pacman" class="external-link">pacman</a></span><span class="op">)</span></span>
-<span><span class="fu"><a href="https://rdrr.io/pkg/pacman/man/p_load.html" class="external-link">p_load</a></span><span class="op">(</span></span>
+<span><span class="fu">pacman</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/pacman/man/p_load.html" class="external-link">p_load</a></span><span class="op">(</span></span>
 <span>  <span class="va">ggplot2</span>, </span>
 <span>  <span class="va">ggpath</span>,   <span class="co"># to read the images directly from the paths</span></span>
 <span>  <span class="va">sysfonts</span>, <span class="co"># to use a custom font</span></span>
 <span>  <span class="va">showtext</span>, <span class="co"># to use a custom font</span></span>
 <span>  <span class="co"># cropcircles, # to crop the image in a hexagonal shape</span></span>
-<span>  <span class="va">here</span></span>
+<span>  <span class="va">here</span>      <span class="co"># to use relative paths</span></span>
 <span>  <span class="op">)</span></span>
 <span><span class="co">#&gt; Installing package into '/home/runner/work/_temp/Library'</span></span>
 <span><span class="co">#&gt; (as 'lib' is unspecified)</span></span>
@@ -111,12 +112,11 @@ of the package.</p>
 <span><span class="va">logo_path</span>  <span class="op">&lt;-</span> <span class="st">"man/figures/logo.png"</span></span>
 <span></span>
 <span><span class="fu">ggplot</span><span class="op">(</span><span class="op">)</span> <span class="op">+</span> </span>
-<span>  <span class="fu">geom_from_path</span><span class="op">(</span><span class="fu">aes</span><span class="op">(</span><span class="fl">.5</span>, <span class="fl">.5</span>, path <span class="op">=</span> <span class="fu">here</span><span class="op">(</span><span class="va">image_path</span><span class="op">)</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu">geom_from_path</span><span class="op">(</span><span class="fu">aes</span><span class="op">(</span><span class="fl">.5</span>, <span class="fl">.5</span>, path <span class="op">=</span> <span class="va">image_path</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu">theme_void</span><span class="op">(</span><span class="op">)</span></span>
-<span><span class="co">#&gt; Warning: <span style="color: #0000BB;">ggpath</span> failed to read an image from</span></span>
-<span><span class="co">#&gt; <span style="color: #0000BB;">/home/runner/work/delemr/delemr/man/figures/delemr_drawing.png</span>. It will insert</span></span>
-<span><span class="co">#&gt; an empty grob instead. Here is the error message: Error in dyn.load(file,</span></span>
-<span><span class="co">#&gt; DLLpath = DLLpath, ...) : unable to load shared object</span></span>
+<span><span class="co">#&gt; Warning: <span style="color: #0000BB;">ggpath</span> failed to read an image from <span style="color: #0000BB;">man/figures/delemr_drawing.png</span>. It will</span></span>
+<span><span class="co">#&gt; insert an empty grob instead. Here is the error message: Error in</span></span>
+<span><span class="co">#&gt; dyn.load(file, DLLpath = DLLpath, ...) : unable to load shared object</span></span>
 <span><span class="co">#&gt; '/home/runner/work/_temp/Library/magick/libs/magick.so':</span></span>
 <span><span class="co">#&gt; libMagick++-6.Q16.so.8: cannot open shared object file: No such file or</span></span>
 <span><span class="co">#&gt; directory</span></span></code></pre></div>
