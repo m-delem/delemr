@@ -1,0 +1,109 @@
+---
+title: "Creating this package's sticker"
+---
+
+```{r}
+#| include: false
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+Quick article to document the process of creating a sticker for this package (which I initially did for fun and learning purposes).
+
+```{r}
+#| label: setup
+
+library(ggplot2)
+library(ggpath)      # to read the images directly from the paths
+library(cropcircles) # to crop the image in a hexagonal shape
+library(sysfonts)    # to use a custom font
+library(showtext)    # to use a custom font
+```
+
+First, I put a little square shaped drawing of mine, named `delemr_drawing.png`, in the `man/figures` folder of the package. 
+
+```{r}
+#| label: raw
+#| fig-width: 4
+#| fig-height: 3.88
+#| fig.alt: >
+#|   Raw image of my drawing.
+
+image_path <- "../../man/figures/delemr_drawing.png"
+stick_path <- "../../man/figures/delemr_sticker.png"
+logo_path  <- "../../man/figures/logo.png"
+
+ggplot() + 
+  geom_from_path(aes(.5, .5, path = image_path)) +
+  theme_void()
+```
+
+Time to build the sticker. 
+
+- I used the `cropcircles::hex_crop()` function to crop the image in a hexagonal shape, with a border of a specified color and size. I had to dug a bit to find the exact grey-blue colour of the GitHub website lines to use as the border color for a cool "merging with the background" effect.
+- I used a custom font to write the package name on the sticker, namely "*Poiret One*" font from Google Fonts. I loaded it with `sysfonts::font_add_google()` and `showtext::showtext_auto()`.
+- I used `ggplot2` to plot the cropped image and the package name on top of it, angled and styled using `ggplot2::annotate()`. I used `ggplot2::theme_void()` to remove everything besides the image.
+- I saved the sticker with `ggplot2::ggsave()` and the appropriate dimensions.
+
+```{r}
+#| label: sticker
+#| fig-width: 5.18
+#| fig-height: 6
+#| fig.alt: >
+#|   Final sticker with the package name.
+
+raw_cropped <- hex_crop(
+  images = image_path,
+  border_colour = "#394049",
+  border_size = 7
+)
+
+font <- "Poiret One" 
+font_add_google(font)
+showtext_auto()
+
+# building the sticker
+p <- 
+  ggplot() + 
+  geom_from_path(aes(.5, .5, path = raw_cropped)) +
+  annotate(
+    "text",
+    x = .24,
+    y = .22,
+    label = "delemr",
+    color = "white",
+    family = font,
+    size = 54,
+    angle = -30
+  ) +
+  scale_x_continuous(limits = c(0, 1), expand = c(0, 0)) +
+  scale_y_continuous(limits = c(0, 1), expand = c(0, 0)) +
+  theme_void()
+
+# saving it
+ggsave(
+  filename = stick_path, plot = p,
+  width = 5.18, height = 6,
+  dpi = 300
+  )
+
+# displaying the saved image
+ggplot() + 
+  geom_from_path(aes(.5, .5, path = stick_path)) +
+  scale_x_continuous(limits = c(0, 1), expand = c(0, 0)) +
+  scale_y_continuous(limits = c(0, 1), expand = c(0, 0)) +
+  theme_void()
+```
+
+Now to use the sticker as a package logo, it needs to be a bit smaller, and this is conveniently taken care of by the `usethis::use_logo()` function.
+
+```{r}
+#| label: logo
+#| eval: false
+
+use_logo(stick_path)
+```
+
+Done!

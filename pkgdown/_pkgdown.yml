@@ -1,0 +1,7 @@
+url: https://m-delem.github.io/delemr/
+template:
+  bootstrap: 5
+  light-switch: true
+  bslib:
+    base_font: {google: "Montserrat"}
+

@@ -22,10 +22,11 @@ define_contrasts(df, cols, contrasts)
 A dataframe with the contrasts defined for the supplied columns.
 }
 \description{
-Short wrapper around the \link{contrasts<-} function to define
+Short wrapper around the \code{\link[=contrasts<-]{contrasts<-()}} function to define
 contrasts inside a pipeline easily. The function takes a dataframe as input
 and returns a dataframe with updated contrasts, allowing to pipe it, which
-differs from the usual use of the \verb{contrasts<-} function.
+differs from the usual use of the \code{\link[=contrasts<-]{contrasts<-()}} function (see examples
+below).
 }
 \examples{
 df <- data.frame(
@@ -37,7 +38,7 @@ df <- data.frame(
 contrasts(df$group) <- contr.sum(2)
 contrasts(df$condition) <- contr.sum(3)
 
-# Result
+# Updated contrasts
 contrasts(df$group)
 contrasts(df$condition)
 
@@ -54,5 +55,5 @@ contrasts(df$condition)
 
 }
 \seealso{
-\link{contrasts<-} which this function wraps.
+\code{\link[=contrasts<-]{contrasts<-()}} which this function wraps.
 }

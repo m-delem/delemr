@@ -4,6 +4,8 @@
 # delemr <img src="man/figures/logo.png" align="right" height="139" alt="" />
 
 <!-- badges: start -->
+
+[![R-CMD-check](https://github.com/m-delem/delemr/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/m-delem/delemr/actions/workflows/R-CMD-check.yaml)
 <!-- badges: end -->
 
 This package contains a collection of functions that I have developed
@@ -18,5 +20,5 @@ If one of those caught your eye, you can install `delemr` like so:
 devtools::install_github("m-delem/delemr")
 ```
 
-*(The package logo was just for fun* :eyes: *- and learning how to
-create one)*
+*(The package logo and website were just for fun* :eyes: *- and learning
+how to create them.)*

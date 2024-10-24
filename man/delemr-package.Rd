@@ -14,6 +14,7 @@ Miscellaneous R functions developed in my personal projects. The functions here 
 Useful links:
 \itemize{
   \item \url{https://m-delem.github.io/delemr/}
+  \item \url{https://github.com/m-delem/delemr}
 }
 
 }
