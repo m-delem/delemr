@@ -18,5 +18,5 @@ If one of those caught your eye, you can install `delemr` like so:
 devtools::install_github("m-delem/delemr")
 ```
 
-*(The package logo was just for fun* :eyes: *- and learning how to do
-it)*
+*(The package logo was just for fun* :eyes: *- and learning how to
+create one)*
