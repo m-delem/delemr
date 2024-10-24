@@ -14,11 +14,17 @@ Depends:
 Imports: 
     crayon,
     dplyr,
+    ggplot2,
     glue,
     lifecycle,
     rlang,
     stats
 Suggests: 
+    cropcircles,
+    ggpath,
+    hexSticker,
+    showtext,
+    sysfonts,
     withr,
     testthat (>= 3.0.0)
 Config/testthat/edition: 3

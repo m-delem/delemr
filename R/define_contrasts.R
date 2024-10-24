@@ -1,6 +1,6 @@
 #' Define contrasts inside a pipeline
 #'
-#' Short wrapper around the [stats::contrasts<-] function to define
+#' Short wrapper around the [contrasts<-] function to define
 #' contrasts inside a pipeline easily. The function takes a dataframe as input
 #' and returns a dataframe with updated contrasts, allowing to pipe it, which
 #' differs from the usual use of the `contrasts<-` function.
@@ -11,7 +11,7 @@
 #'   *  as a vector, e.g., `c(-1, 1)` for a two-level factor
 #'   *  as a matrix, e.g., `contr.sum(3)` for a three-level factor
 #' @returns A dataframe with the contrasts defined for the supplied columns.
-#' @seealso [stats::contrasts<-] which this function wraps.
+#' @seealso [contrasts<-] which this function wraps.
 #' @examples
 #' df <- data.frame(
 #'   group = factor(rep(c("A", "B"), 3)),
@@ -22,6 +22,7 @@
 #' contrasts(df$group) <- contr.sum(2)
 #' contrasts(df$condition) <- contr.sum(3)
 #'
+#' # Result
 #' contrasts(df$group)
 #' contrasts(df$condition)
 #'
@@ -32,6 +33,7 @@
 #'     contrasts = list(contr.sum(2), contr.sum(3))
 #'   )
 #'
+#' # Same result
 #' contrasts(df$group)
 #' contrasts(df$condition)
 #'

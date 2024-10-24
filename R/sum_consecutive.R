@@ -7,10 +7,10 @@
 #' @param x A vector.
 #' @returns A vector where consecutive non-null numeric values have been summed.
 #' @examples
-#' sum_consecutive_values(c(1, 2, 0, 0, 3, 4, 0, 0, 0, 4, 3))
-#' sum_consecutive_values(c(1, 2, 0, 12, 1, 3, 0, 0, 8, 0, 4))
+#' sum_consecutive(c(1, 2, 0, 0, 3, 4, 0, 0, 0, 4, 3))
+#' sum_consecutive(c(1, 2, 0, 12, 1, 3, 0, 0, 8, 0, 3))
 #' @export
-sum_consecutive_values <- function(x) {
+sum_consecutive <- function(x) {
   summed_vector <-
     data.frame(
       x = x,
@@ -23,7 +23,7 @@ sum_consecutive_values <- function(x) {
     group_by(.data$group) |>
     mutate(summed = max(cumsum(.data$x))) |> # sums and keeps the biggest value
     select(!x) |>
-    distinct() |>
+    distinct() |> # removes duplicates from the same group (not all duplicates)
     filter(.data$group != "no") |> # removes zeros
     pull(.data$summed) # extract the vector
 

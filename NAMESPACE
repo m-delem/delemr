@@ -2,7 +2,7 @@
 
 export(def_contr)
 export(define_contrasts)
-export(sum_consecutive_values)
+export(sum_consecutive)
 import(rlang)
 importFrom(dplyr,distinct)
 importFrom(dplyr,filter)
