@@ -12,7 +12,7 @@ knitr::opts_chunk$set(
 )
 ```
 
-Quick article to document the process of creating a sticker for this package (which I initially did for fun and learning purposes). I use the `pacman` package in my setup to conveniently check "if installed"/install/load the necessary packages, all in one go.
+Quick article to document the process of creating a sticker for this package (which I initially did for fun and learning purposes). I use the `pacman` package in my setup to conveniently "check if installed"/install/load the necessary packages, all in one go.
 
 ```{r}
 #| label: setup
@@ -50,9 +50,9 @@ knitr::include_graphics(image_path)
 
 Time to build the sticker. 
 
-- I used the `hex_crop()` function to crop the image in a hexagonal shape, 
+- I used the `hex_crop()` function from `cropcircles`[^1] to crop the image in a hexagonal shape, 
 with a border of a specified color and size. 
-I had to dug a bit to find the exact grey-blue colour of the GitHub website lines to use as the border colour for a cool "merging with the background" effect.
+I had to dig a bit to find the exact grey-blue colour of the GitHub website lines to use as the border colour for a cool "merging with the background" effect.
 - I used a custom font to write the package name on the sticker, 
 namely "*Poiret One*" font from Google Fonts. 
 I loaded it with `sysfonts::font_add_google()` and `showtext::showtext_auto()`.
@@ -60,6 +60,8 @@ I loaded it with `sysfonts::font_add_google()` and `showtext::showtext_auto()`.
 angled and styled using `ggplot2::annotate()`. 
 I used `ggplot2::theme_void()` to remove everything besides the image.
 - I saved the sticker with `ggplot2::ggsave()` and the appropriate dimensions.
+
+[^1]: The `cropcircles` package was commented out in the setup chunk because it had a weird interference with the GitHub Actions used to deploy this website.
 
 ```{r}
 #| label: sticker
