@@ -21,6 +21,7 @@ library(ggpath)      # to read the images directly from the paths
 # library(cropcircles) # to crop the image in a hexagonal shape
 library(sysfonts)    # to use a custom font
 library(showtext)    # to use a custom font
+library(here)
 ```
 
 First, I put a little square shaped drawing of mine, named `delemr_drawing.png`, in the `man/figures` folder of the package. 
@@ -32,12 +33,12 @@ First, I put a little square shaped drawing of mine, named `delemr_drawing.png`,
 #| fig.alt: >
 #|   Raw image of my drawing.
 
-image_path <- "../../man/figures/delemr_drawing.png"
-stick_path <- "../../man/figures/delemr_sticker.png"
-logo_path  <- "../../man/figures/logo.png"
+image_path <- "man/figures/delemr_drawing.png"
+stick_path <- "man/figures/delemr_sticker.png"
+logo_path  <- "man/figures/logo.png"
 
 ggplot() + 
-  geom_from_path(aes(.5, .5, path = image_path)) +
+  geom_from_path(aes(.5, .5, path = here(image_path))) +
   theme_void()
 ```
 
@@ -94,9 +95,10 @@ ggsave(
 #| fig-height: 6
 #| fig.alt: >
 #|   Final sticker with the package name.
+
 # displaying the saved image
 ggplot() + 
-  geom_from_path(aes(.5, .5, path = stick_path)) +
+  geom_from_path(aes(.5, .5, path = here(stick_path))) +
   scale_x_continuous(limits = c(0, 1), expand = c(0, 0)) +
   scale_y_continuous(limits = c(0, 1), expand = c(0, 0)) +
   theme_void()
