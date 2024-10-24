@@ -17,8 +17,8 @@ Quick article to document the process of creating a sticker for this package (wh
 
 library(ggplot2)
 library(ggpath)      # to read the images directly from the paths
-library(magick)      # to crop the image in a hexagonal shape
-library(cropcircles) # to crop the image in a hexagonal shape
+# cropcircles is commented because it has a weird interference with GHA
+# library(cropcircles) # to crop the image in a hexagonal shape
 library(sysfonts)    # to use a custom font
 library(showtext)    # to use a custom font
 ```
@@ -49,11 +49,8 @@ Time to build the sticker.
 - I saved the sticker with `ggplot2::ggsave()` and the appropriate dimensions.
 
 ```{r}
-#| label: sticker
-#| fig-width: 5.18
-#| fig-height: 6
-#| fig.alt: >
-#|   Final sticker with the package name.
+#| label: create-sticker
+#| eval: false
 
 raw_cropped <- hex_crop(
   images = image_path,
@@ -89,7 +86,15 @@ ggsave(
   width = 5.18, height = 6,
   dpi = 300
   )
+```
 
+
+```{r}
+#| label: sticker
+#| fig-width: 5.18
+#| fig-height: 6
+#| fig.alt: >
+#|   Final sticker with the package name.
 # displaying the saved image
 ggplot() + 
   geom_from_path(aes(.5, .5, path = stick_path)) +
