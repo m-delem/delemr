@@ -25,14 +25,15 @@ create_sticker <- function(pkg_name = "delemr"){
   raw_image <- paste0(path, "_raw_img.png")
   stick_raw <- paste0(path, "_sticker_raw.png")
   stick_final <- paste0(path, "_sticker.png")
+  logo_path <- "man/figures/logo.png"
   font <- "Poiret One"
 
   raw <- system.file(raw_image, package = pkg_name)
 
   raw_cropped <- cropcircles::hex_crop(
     images = raw,
-    border_colour = "#A1A1A1",
-    border_size = 4
+    border_colour = "#394049",
+    border_size = 7
   )
 
   sysfonts::font_add_google(font)
@@ -77,5 +78,7 @@ create_sticker <- function(pkg_name = "delemr"){
     filename = stick_final
   )
 
-  file.show(stick_final)
+  use_logo(stick_final)
+
+  file.show(logo_path)
 }
