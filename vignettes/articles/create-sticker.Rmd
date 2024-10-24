@@ -15,13 +15,20 @@ Quick article to document the process of creating a sticker for this package (wh
 ```{r}
 #| label: setup
 
-library(ggplot2)
-library(ggpath)      # to read the images directly from the paths
+if (!requireNamespace("pacman", quietly = TRUE)) {
+  install.packages("pacman")
+}
+
+library(pacman)
+p_load(
+  ggplot2, 
+  ggpath,   # to read the images directly from the paths
+  sysfonts, # to use a custom font
+  showtext, # to use a custom font
+  # cropcircles, # to crop the image in a hexagonal shape
+  here
+  )
 # cropcircles is commented because it has a weird interference with GHA
-# library(cropcircles) # to crop the image in a hexagonal shape
-library(sysfonts)    # to use a custom font
-library(showtext)    # to use a custom font
-library(here) # test
 ```
 
 First, I put a little square shaped drawing of mine, named `delemr_drawing.png`, in the `man/figures` folder of the package. 
