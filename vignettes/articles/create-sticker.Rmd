@@ -14,6 +14,7 @@ Quick article to document the process of creating a sticker for this package (wh
 
 ```{r}
 #| label: setup
+#| eval: false
 
 library(ggplot2)
 library(ggpath)      # to read the images directly from the paths
@@ -27,6 +28,7 @@ First, I put a little square shaped drawing of mine, named `delemr_drawing.png`,
 
 ```{r}
 #| label: raw
+#| eval: false
 #| fig-width: 4
 #| fig-height: 3.88
 #| fig.alt: >
@@ -91,6 +93,7 @@ ggsave(
 
 ```{r}
 #| label: sticker
+#| eval: false
 #| fig-width: 5.18
 #| fig-height: 6
 #| fig.alt: >
