@@ -80,7 +80,7 @@
     
 <p>Quick article to document the process of creating a sticker for this
 package (which I initially did for fun and learning purposes). I use the
-<code>pacman</code> package in my setup to conveniently check “if
+<code>pacman</code> package in my setup to conveniently “check if
 installed”/install/load the necessary packages, all in one go.</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw">if</span> <span class="op">(</span><span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/ns-load.html" class="external-link">requireNamespace</a></span><span class="op">(</span><span class="st">"pacman"</span>, quietly <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span></span>
@@ -107,11 +107,13 @@ installed”/install/load the necessary packages, all in one go.</p>
 <p><img src="delemr_drawing.png" alt="Raw image of my drawing." width="50%"></p>
 <p>Time to build the sticker.</p>
 <ul>
-<li>I used the <code>hex_crop()</code> function to crop the image in a
-hexagonal shape, with a border of a specified color and size. I had to
-dug a bit to find the exact grey-blue colour of the GitHub website lines
-to use as the border colour for a cool “merging with the background”
-effect.</li>
+<li>I used the <code>hex_crop()</code> function from
+<code>cropcircles</code><a class="footnote-ref" tabindex="0" data-bs-toggle="popover" data-bs-content="&lt;p&gt;The &lt;code&gt;cropcircles&lt;/code&gt; package was commented out
+in the setup chunk because it had a weird interference with the GitHub
+Actions used to deploy this website.&lt;/p&gt;"><sup>1</sup></a> to crop the image in a hexagonal shape,
+with a border of a specified color and size. I had to dig a bit to find
+the exact grey-blue colour of the GitHub website lines to use as the
+border colour for a cool “merging with the background” effect.</li>
 <li>I used a custom font to write the package name on the sticker,
 namely “<em>Poiret One</em>” font from Google Fonts. I loaded it with
 <code><a href="https://rdrr.io/pkg/sysfonts/man/font_add_google.html" class="external-link">sysfonts::font_add_google()</a></code> and
@@ -168,6 +170,7 @@ smaller, and this is conveniently taken care of by the
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">usethis</span><span class="fu">::</span><span class="fu">use_logo</span><span class="op">(</span><span class="va">stick_path</span><span class="op">)</span></span></code></pre></div>
 <p>Done!</p>
+
   </main>
 </div>
 
