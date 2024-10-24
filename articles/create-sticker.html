@@ -88,28 +88,21 @@ installed”/install/load the necessary packages, all in one go.</p>
 <span><span class="op">}</span></span>
 <span></span>
 <span><span class="fu">pacman</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/pacman/man/p_load.html" class="external-link">p_load</a></span><span class="op">(</span></span>
+<span>  <span class="co"># cropcircles, # to crop the image in a hexagonal shape</span></span>
 <span>  <span class="va">ggplot2</span>, </span>
 <span>  <span class="va">ggpath</span>,   <span class="co"># to read the images directly from the paths</span></span>
-<span>  <span class="va">sysfonts</span>, <span class="co"># to use a custom font</span></span>
-<span>  <span class="va">showtext</span>, <span class="co"># to use a custom font</span></span>
 <span>  <span class="va">here</span>,     <span class="co"># to use relative paths</span></span>
-<span>  <span class="va">knitr</span>    <span class="co"># to include the images in the document</span></span>
-<span>  <span class="co"># cropcircles, # to crop the image in a hexagonal shape</span></span>
+<span>  <span class="va">knitr</span>,    <span class="co"># to include the images in the article</span></span>
+<span>  <span class="va">showtext</span>, <span class="co"># to use a custom font</span></span>
+<span>  <span class="va">sysfonts</span> <span class="co"># to use a custom font</span></span>
 <span>  <span class="op">)</span></span>
 <span><span class="co"># cropcircles is commented because it has a weird interference with GHA</span></span></code></pre></div>
-<p>First, I put a little square shaped drawing of mine, named
-<code>delemr_drawing.png</code>, in the <code>man/figures</code> folder
-of the package.</p>
+<p>It all starts with a little square shaped drawing of mine, named
+<code>delemr_drawing.png</code>.</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">image_path</span> <span class="op">&lt;-</span> <span class="st">"delemr_drawing.png"</span></span>
-<span><span class="va">stick_path</span> <span class="op">&lt;-</span> <span class="st">"delemr_sticker.png"</span></span>
+<span><span class="va">stick_path</span> <span class="op">&lt;-</span> <span class="st">"delemr_sticker.png"</span> <span class="co"># our eventual sticker</span></span>
 <span></span>
-<span><span class="fu">ggplot</span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu">geom_from_path</span><span class="op">(</span><span class="fu">aes</span><span class="op">(</span><span class="fl">.5</span>, <span class="fl">.5</span>, path <span class="op">=</span> <span class="va">image_path</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu">theme_void</span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
-<p><img src="create-sticker_files/figure-html/raw-1.png" alt="Raw image of my drawing." width="50%"></p>
-<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span></span>
 <span><span class="fu">knitr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/knitr/man/include_graphics.html" class="external-link">include_graphics</a></span><span class="op">(</span><span class="va">image_path</span><span class="op">)</span></span></code></pre></div>
 <p><img src="delemr_drawing.png" alt="Raw image of my drawing." width="50%"></p>
 <p>Time to build the sticker.</p>
@@ -131,7 +124,7 @@ image.</li>
 <li>I saved the sticker with <code><a href="https://ggplot2.tidyverse.org/reference/ggsave.html" class="external-link">ggplot2::ggsave()</a></code> and the
 appropriate dimensions.</li>
 </ul>
-<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">raw_cropped</span> <span class="op">&lt;-</span> <span class="fu">hex_crop</span><span class="op">(</span></span>
 <span>  images <span class="op">=</span> <span class="va">image_path</span>,</span>
 <span>  border_colour <span class="op">=</span> <span class="st">"#394049"</span>,</span>
@@ -166,22 +159,13 @@ appropriate dimensions.</li>
 <span>  width <span class="op">=</span> <span class="fl">5.18</span>, height <span class="op">=</span> <span class="fl">6</span>,</span>
 <span>  dpi <span class="op">=</span> <span class="fl">300</span></span>
 <span>  <span class="op">)</span></span></code></pre></div>
-<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="co"># displaying the saved image</span></span>
-<span><span class="fu">ggplot</span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu">geom_from_path</span><span class="op">(</span><span class="fu">aes</span><span class="op">(</span><span class="fl">.5</span>, <span class="fl">.5</span>, path <span class="op">=</span> <span class="va">stick_path</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu">scale_x_continuous</span><span class="op">(</span>limits <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">1</span><span class="op">)</span>, expand <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">0</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu">scale_y_continuous</span><span class="op">(</span>limits <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">1</span><span class="op">)</span>, expand <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">0</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu">theme_void</span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
-<p><img src="create-sticker_files/figure-html/sticker-1.png" alt="Final sticker with the package name." width="50%"></p>
-<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span></span>
-<span><span class="fu">knitr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/knitr/man/include_graphics.html" class="external-link">include_graphics</a></span><span class="op">(</span><span class="va">stick_path</span><span class="op">)</span></span></code></pre></div>
-<p><img src="delemr_sticker.png" alt="Final sticker with the package name." width="50%"></p>
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu">knitr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/knitr/man/include_graphics.html" class="external-link">include_graphics</a></span><span class="op">(</span><span class="va">stick_path</span><span class="op">)</span></span></code></pre></div>
+<p><img src="delemr_sticker.png" width="50%"></p>
 <p>Now to use the sticker as a package logo, it needs to be a bit
 smaller, and this is conveniently taken care of by the
 <code>usethis::use_logo()</code> function.</p>
-<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">usethis</span><span class="fu">::</span><span class="fu">use_logo</span><span class="op">(</span><span class="va">stick_path</span><span class="op">)</span></span></code></pre></div>
 <p>Done!</p>
   </main>
