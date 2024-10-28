@@ -6,6 +6,12 @@
 ## usethis namespace: start
 #' @import rlang
 #' @importFrom dplyr mutate if_else group_by pull filter select distinct
+#' @importFrom ggplot2 aes
+#' @importFrom ggplot2 element_line
+#' @importFrom ggplot2 element_rect
+#' @importFrom ggplot2 element_text
+#' @importFrom ggplot2 geom_point
+#' @importFrom ggplot2 ggplot
 #' @importFrom glue glue
 #' @importFrom glue glue glue_col
 #' @importFrom lifecycle deprecated
