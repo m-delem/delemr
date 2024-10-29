@@ -12,6 +12,7 @@
 #' @importFrom ggplot2 element_text
 #' @importFrom ggplot2 geom_point
 #' @importFrom ggplot2 ggplot
+#' @importFrom ggplot2 theme
 #' @importFrom glue glue
 #' @importFrom glue glue glue_col
 #' @importFrom lifecycle deprecated

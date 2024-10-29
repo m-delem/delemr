@@ -35,9 +35,10 @@ theme_transparent <- function() {
   )
 }
 
+#' @param colour The colour to set all small line and text elements to.
 #' @export
 #' @rdname ggthemes
-theme_element_colour <- function(colour = "#8c979f") {
+theme_element_colour <- function(colour = "black") {
   theme(
     axis.text =    element_text(color = colour),
     axis.title =   element_text(color = colour),

@@ -7,7 +7,10 @@
 \usage{
 theme_transparent()
 
-theme_element_colour(colour = "#8c979f")
+theme_element_colour(colour = "black")
+}
+\arguments{
+\item{colour}{The colour to set all small line and text elements to.}
 }
 \description{
 These functions modify specific theme elements of a plot. Be wary that,
