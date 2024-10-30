@@ -29,9 +29,9 @@
 theme_transparent <- function() {
   theme(
     panel.background =      element_rect(fill = "transparent"),
-    plot.background =       element_rect(fill = "transparent"),
+    plot.background =       element_rect(fill = "transparent", color = NA),
     legend.background =     element_rect(fill = 'transparent'),
-    legend.box.background = element_rect(fill = 'transparent')
+    legend.box.background = element_rect(fill = 'transparent', color = NA)
   )
 }
 
