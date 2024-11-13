@@ -40,15 +40,16 @@ theme_transparent <- function() {
 #' @rdname ggthemes
 theme_element_colour <- function(colour = "black") {
   theme(
-    axis.text =    element_text(color = colour),
-    axis.title =   element_text(color = colour),
-    axis.line =    element_line(color = colour),
-    legend.text =  element_text(color = colour),
-    legend.title = element_text(color = colour),
+    axis.text          = element_text(color = colour),
+    axis.title         = element_text(color = colour),
+    axis.ticks         = element_line(color = colour),
+    axis.line          = element_line(color = colour),
+    legend.text        = element_text(color = colour),
+    legend.title       = element_text(color = colour),
     panel.grid.major.x = element_line(color = colour),
     panel.grid.major.y = element_line(color = colour),
     panel.grid.minor.x = element_line(color = colour),
     panel.grid.minor.y = element_line(color = colour),
-    panel.background =   element_rect(color = colour)
+    panel.background   = element_rect(color = colour)
   )
 }
