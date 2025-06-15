@@ -21,15 +21,14 @@ knitr::opts_chunk$set(
 [![Codecov test coverage](https://codecov.io/gh/m-delem/delemr/graph/badge.svg)](https://app.codecov.io/gh/m-delem/delemr)
 <!-- badges: end -->
 
-This package several functions that I have developed for various purposes in my 
-work. These functions are not necessarily related to each other, they only have 
-in common that they have been useful to me at some point. 
+This package contains several functions that I have developed for various 
+purposes in my work. These functions are not necessarily related to each other, 
+they only have in common that they have been useful to me at some point. 
 
-If one of those caught your eye, you can install `delemr` like so:
+*(The package logo and website were just for fun* :eyes: *- and learning how to 
+create them.)*
 
 ``` r
 # install.packages("pak")
 pak::pak("m-delem/delemr")
 ```
-
-*(The package logo and website were just for fun* :eyes: *- and learning how to create them.)*
