@@ -10,14 +10,14 @@ NULL
 
 .onAttach <- function(libname, pkgname) {
   packageStartupMessage(glue::glue_col(
-    "
-    {blue Welcome to {cyan delemr}. The functions here only have
-    in common that they have been useful to me at some
-    point, but they are documented, if you're curious
-    about them.}
+    "{blue
+    Welcome to {cyan delemr}.
+    }
     ",
     .literal = TRUE))
 }
+# The functions here only have in common that they have been useful to me
+# at some point, but they are documented, if you're curious about them.
 
 # To avoid check NOTE on package sub-dependencies not called
 ignore_unused_imports <- function() {
