@@ -6,17 +6,16 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <title>Creating this package's sticker • delemr</title>
-<!-- favicons --><link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
-<link rel="icon" type="image/png" sizes="32x32" href="../favicon-32x32.png">
-<link rel="apple-touch-icon" type="image/png" sizes="180x180" href="../apple-touch-icon.png">
-<link rel="apple-touch-icon" type="image/png" sizes="120x120" href="../apple-touch-icon-120x120.png">
-<link rel="apple-touch-icon" type="image/png" sizes="76x76" href="../apple-touch-icon-76x76.png">
-<link rel="apple-touch-icon" type="image/png" sizes="60x60" href="../apple-touch-icon-60x60.png">
+<!-- favicons --><link rel="icon" type="image/png" sizes="96x96" href="../favicon-96x96.png">
+<link rel="icon" type="”image/svg+xml”" href="../favicon.svg">
+<link rel="apple-touch-icon" sizes="180x180" href="../apple-touch-icon.png">
+<link rel="icon" sizes="any" href="../favicon.ico">
+<link rel="manifest" href="../site.webmanifest">
 <script src="../lightswitch.js"></script><script src="../deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="../deps/bootstrap-5.3.1/bootstrap.min.css" rel="stylesheet">
-<script src="../deps/bootstrap-5.3.1/bootstrap.bundle.min.js"></script><link href="../deps/Montserrat-0.4.9/font.css" rel="stylesheet">
-<link href="../deps/font-awesome-6.4.2/css/all.min.css" rel="stylesheet">
-<link href="../deps/font-awesome-6.4.2/css/v4-shims.min.css" rel="stylesheet">
+<script src="../deps/bootstrap-5.3.1/bootstrap.bundle.min.js"></script><link href="../deps/Montserrat-0.4.10/font.css" rel="stylesheet">
+<link href="../deps/font-awesome-6.5.2/css/all.min.css" rel="stylesheet">
+<link href="../deps/font-awesome-6.5.2/css/v4-shims.min.css" rel="stylesheet">
 <script src="../deps/headroom-0.11.0/headroom.min.js"></script><script src="../deps/headroom-0.11.0/jQuery.headroom.min.js"></script><script src="../deps/bootstrap-toc-1.0.1/bootstrap-toc.min.js"></script><script src="../deps/clipboard.js-2.0.11/clipboard.min.js"></script><script src="../deps/search-1.0.0/autocomplete.jquery.min.js"></script><script src="../deps/search-1.0.0/fuse.min.js"></script><script src="../deps/search-1.0.0/mark.min.js"></script><!-- pkgdown --><script src="../pkgdown.js"></script><meta property="og:title" content="Creating this package's sticker">
 </head>
 <body>
@@ -79,24 +78,9 @@
     
     
 <p>Quick article to document the process of creating a sticker for this
-package (which I initially did for fun and learning purposes). I use the
-<code>pacman</code> package in my setup to conveniently “check if
-installed”/install/load the necessary packages, all in one go.</p>
+package (which I initially did for fun and learning purposes).</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="kw">if</span> <span class="op">(</span><span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/ns-load.html" class="external-link">requireNamespace</a></span><span class="op">(</span><span class="st">"pacman"</span>, quietly <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span></span>
-<span>  <span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="st">"pacman"</span><span class="op">)</span></span>
-<span><span class="op">}</span></span>
-<span></span>
-<span><span class="fu">pacman</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/pacman/man/p_load.html" class="external-link">p_load</a></span><span class="op">(</span></span>
-<span>  <span class="co"># cropcircles, # to crop the image in a hexagonal shape</span></span>
-<span>  <span class="va">ggplot2</span>, </span>
-<span>  <span class="va">ggpath</span>,   <span class="co"># to read the images directly from the paths</span></span>
-<span>  <span class="va">here</span>,     <span class="co"># to use relative paths</span></span>
-<span>  <span class="va">knitr</span>,    <span class="co"># to include the images in the article</span></span>
-<span>  <span class="va">showtext</span>, <span class="co"># to use a custom font</span></span>
-<span>  <span class="va">sysfonts</span> <span class="co"># to use a custom font</span></span>
-<span>  <span class="op">)</span></span>
-<span><span class="co"># cropcircles is commented because it has a weird interference with GHA</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://ggplot2.tidyverse.org" class="external-link">ggplot2</a></span><span class="op">)</span></span></code></pre></div>
 <p>It all starts with a little square shaped drawing of mine, named
 <code>delemr_drawing.png</code>.</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
@@ -107,40 +91,38 @@ installed”/install/load the necessary packages, all in one go.</p>
 <p><img src="delemr_drawing.png" alt="Raw image of my drawing." width="50%"></p>
 <p>Time to build the sticker.</p>
 <ul>
-<li>I used the <code>hex_crop()</code> function from
-<code>cropcircles</code><a class="footnote-ref" tabindex="0" data-bs-toggle="popover" data-bs-content="&lt;p&gt;The &lt;code&gt;cropcircles&lt;/code&gt; package was commented out
-in the setup chunk because it had a weird interference with the GitHub
-Actions used to deploy this website.&lt;/p&gt;"><sup>1</sup></a> to crop the image in a hexagonal shape,
-with a border of a specified color and size. I had to dig a bit to find
-the exact grey-blue colour of the GitHub website lines to use as the
-border colour for a cool “merging with the background” effect.</li>
-<li>I used a custom font to write the package name on the sticker,
+<li><p>I used the <code>hex_crop()</code> function from
+<code>cropcircles</code> to crop the image in a hexagonal shape, with a
+border of a specified colour and size. I had to dig a bit to find the
+exact grey-blue colour of the GitHub website lines to use as the border
+colour for a cool “merging with the background” effect.</p></li>
+<li><p>I used a custom font to write the package name on the sticker,
 namely “<em>Poiret One</em>” font from Google Fonts. I loaded it with
 <code><a href="https://rdrr.io/pkg/sysfonts/man/font_add_google.html" class="external-link">sysfonts::font_add_google()</a></code> and
-<code><a href="https://rdrr.io/pkg/showtext/man/showtext_auto.html" class="external-link">showtext::showtext_auto()</a></code>.</li>
-<li>I used <code>ggplot2</code> to plot the cropped image and the
+<code><a href="https://rdrr.io/pkg/showtext/man/showtext_auto.html" class="external-link">showtext::showtext_auto()</a></code>.</p></li>
+<li><p>I used <code>ggpath</code> to plot the cropped image and the
 package name on top of it, angled and styled using
 <code><a href="https://ggplot2.tidyverse.org/reference/annotate.html" class="external-link">ggplot2::annotate()</a></code>. I used
 <code><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html" class="external-link">ggplot2::theme_void()</a></code> to remove everything besides the
-image.</li>
-<li>I saved the sticker with <code><a href="https://ggplot2.tidyverse.org/reference/ggsave.html" class="external-link">ggplot2::ggsave()</a></code> and the
-appropriate dimensions.</li>
+image.</p></li>
+<li><p>I saved the sticker with <code><a href="https://ggplot2.tidyverse.org/reference/ggsave.html" class="external-link">ggplot2::ggsave()</a></code> and the
+appropriate dimensions.</p></li>
 </ul>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">raw_cropped</span> <span class="op">&lt;-</span> <span class="fu">hex_crop</span><span class="op">(</span></span>
+<code class="sourceCode R"><span><span class="va">raw_cropped</span> <span class="op">&lt;-</span> <span class="fu">cropcircles</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/cropcircles/man/crop_circle.html" class="external-link">hex_crop</a></span><span class="op">(</span></span>
 <span>  images <span class="op">=</span> <span class="va">image_path</span>,</span>
 <span>  border_colour <span class="op">=</span> <span class="st">"#394049"</span>,</span>
 <span>  border_size <span class="op">=</span> <span class="fl">7</span></span>
 <span><span class="op">)</span></span>
 <span></span>
 <span><span class="va">font</span> <span class="op">&lt;-</span> <span class="st">"Poiret One"</span> </span>
-<span><span class="fu">font_add_google</span><span class="op">(</span><span class="va">font</span><span class="op">)</span></span>
-<span><span class="fu">showtext_auto</span><span class="op">(</span><span class="op">)</span></span>
+<span><span class="fu">sysfonts</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/sysfonts/man/font_add_google.html" class="external-link">font_add_google</a></span><span class="op">(</span><span class="va">font</span><span class="op">)</span></span>
+<span><span class="fu">showtext</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/showtext/man/showtext_auto.html" class="external-link">showtext_auto</a></span><span class="op">(</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># building the sticker</span></span>
 <span><span class="va">p</span> <span class="op">&lt;-</span> </span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html" class="external-link">ggplot</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span> </span>
-<span>  <span class="fu">geom_from_path</span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span><span class="fl">.5</span>, <span class="fl">.5</span>, path <span class="op">=</span> <span class="va">raw_cropped</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu">ggpath</span><span class="fu">::</span><span class="fu"><a href="https://mrcaseb.github.io/ggpath/reference/geom_from_path.html" class="external-link">geom_from_path</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span><span class="fl">.5</span>, <span class="fl">.5</span>, path <span class="op">=</span> <span class="va">raw_cropped</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/annotate.html" class="external-link">annotate</a></span><span class="op">(</span></span>
 <span>    <span class="st">"text"</span>,</span>
 <span>    x <span class="op">=</span> <span class="fl">.24</span>,</span>
@@ -163,14 +145,13 @@ appropriate dimensions.</li>
 <span>  <span class="op">)</span></span></code></pre></div>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">knitr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/knitr/man/include_graphics.html" class="external-link">include_graphics</a></span><span class="op">(</span><span class="va">stick_path</span><span class="op">)</span></span></code></pre></div>
-<p><img src="delemr_sticker.png" width="50%"></p>
+<p><img src="delemr_sticker.png" alt="Final sticker with the package name." width="50%"></p>
 <p>Now to use the sticker as a package logo, it needs to be a bit
 smaller, and this is conveniently taken care of by the
-<code>usethis::use_logo()</code> function.</p>
+<code><a href="https://usethis.r-lib.org/reference/use_logo.html" class="external-link">usethis::use_logo()</a></code> function.</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu">usethis</span><span class="fu">::</span><span class="fu">use_logo</span><span class="op">(</span><span class="va">stick_path</span><span class="op">)</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu">usethis</span><span class="fu">::</span><span class="fu"><a href="https://usethis.r-lib.org/reference/use_logo.html" class="external-link">use_logo</a></span><span class="op">(</span><span class="va">stick_path</span><span class="op">)</span></span></code></pre></div>
 <p>Done!</p>
-
   </main>
 </div>
 
@@ -181,7 +162,7 @@ smaller, and this is conveniently taken care of by the
 </div>
 
 <div class="pkgdown-footer-right">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.3.</p>
 </div>
 
     </footer>
