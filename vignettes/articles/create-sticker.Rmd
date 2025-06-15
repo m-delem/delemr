@@ -12,29 +12,18 @@ knitr::opts_chunk$set(
 )
 ```
 
-Quick article to document the process of creating a sticker for this package (which I initially did for fun and learning purposes). I use the `pacman` package in my setup to conveniently "check if installed"/install/load the necessary packages, all in one go.
+Quick article to document the process of creating a sticker for this package 
+(which I initially did for fun and learning purposes).
 
 ```{r}
 #| label: setup
 #| eval: true
 
-if (!requireNamespace("pacman", quietly = TRUE)) {
-  install.packages("pacman")
-}
-
-pacman::p_load(
-  # cropcircles, # to crop the image in a hexagonal shape
-  ggplot2, 
-  ggpath,   # to read the images directly from the paths
-  here,     # to use relative paths
-  knitr,    # to include the images in the article
-  showtext, # to use a custom font
-  sysfonts # to use a custom font
-  )
-# cropcircles is commented because it has a weird interference with GHA
+library(ggplot2)
 ```
 
-It all starts with a little square shaped drawing of mine, named `delemr_drawing.png`. 
+It all starts with a little square shaped drawing of mine, named 
+`delemr_drawing.png`. 
 
 ```{r out.width="50%", alt="Raw image of my drawing."}
 #| label: draw
@@ -50,18 +39,20 @@ knitr::include_graphics(image_path)
 
 Time to build the sticker. 
 
-- I used the `hex_crop()` function from `cropcircles`[^1] to crop the image in a hexagonal shape, 
-with a border of a specified color and size. 
-I had to dig a bit to find the exact grey-blue colour of the GitHub website lines to use as the border colour for a cool "merging with the background" effect.
-- I used a custom font to write the package name on the sticker, 
-namely "*Poiret One*" font from Google Fonts. 
-I loaded it with `sysfonts::font_add_google()` and `showtext::showtext_auto()`.
-- I used `ggplot2` to plot the cropped image and the package name on top of it, 
-angled and styled using `ggplot2::annotate()`. 
-I used `ggplot2::theme_void()` to remove everything besides the image.
-- I saved the sticker with `ggplot2::ggsave()` and the appropriate dimensions.
+- I used the `hex_crop()` function from `cropcircles` to crop the image in a 
+  hexagonal shape, with a border of a specified colour and size. I had to dig a 
+  bit to find the exact grey-blue colour of the GitHub website lines to use as 
+  the border colour for a cool "merging with the background" effect.
 
-[^1]: The `cropcircles` package was commented out in the setup chunk because it had a weird interference with the GitHub Actions used to deploy this website.
+- I used a custom font to write the package name on the sticker, namely 
+  "*Poiret One*" font from Google Fonts. I loaded it with 
+  `sysfonts::font_add_google()` and `showtext::showtext_auto()`.
+  
+- I used `ggpath` to plot the cropped image and the package name on top of it, 
+  angled and styled using `ggplot2::annotate()`. I used `ggplot2::theme_void()` 
+  to remove everything besides the image.
+  
+- I saved the sticker with `ggplot2::ggsave()` and the appropriate dimensions.
 
 ```{r}
 #| label: sticker
@@ -71,20 +62,20 @@ I used `ggplot2::theme_void()` to remove everything besides the image.
 #|   Final sticker with the package name.
 #| eval: false
 
-raw_cropped <- hex_crop(
+raw_cropped <- cropcircles::hex_crop(
   images = image_path,
   border_colour = "#394049",
   border_size = 7
 )
 
 font <- "Poiret One" 
-font_add_google(font)
-showtext_auto()
+sysfonts::font_add_google(font)
+showtext::showtext_auto()
 
 # building the sticker
 p <- 
   ggplot() + 
-  geom_from_path(aes(.5, .5, path = raw_cropped)) +
+  ggpath::geom_from_path(aes(.5, .5, path = raw_cropped)) +
   annotate(
     "text",
     x = .24,
@@ -107,7 +98,9 @@ ggsave(
   )
 ```
 
-```{r out.width="50%", alt="Final sticker with the package name."}
+```{r out.width="50%"}
+#| fig.alt: >
+#|   Final sticker with the package name.
 knitr::include_graphics(stick_path)
 ```
 

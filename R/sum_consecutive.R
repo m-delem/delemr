@@ -16,16 +16,16 @@ sum_consecutive <- function(x) {
       x = x,
       group = cumsum(x == 0) # creates a group for each zero
     ) |>
-    mutate(
+    dplyr::mutate(
       group = as.factor(.data$group),
-      group = if_else(x == 0, "no", .data$group)
+      group = ifelse(x == 0, "no", .data$group)
     ) |> # replace zeros to isolate them
-    group_by(.data$group) |>
-    mutate(summed = max(cumsum(.data$x))) |> # sums and keeps the biggest value
-    select(!x) |>
-    distinct() |> # removes duplicates from the same group (not all duplicates)
-    filter(.data$group != "no") |> # removes zeros
-    pull(.data$summed) # extract the vector
+    dplyr::group_by(.data$group) |>
+    dplyr::mutate(summed = max(cumsum(.data$x))) |> # sums and keeps the biggest
+    dplyr::select(!x) |>
+    dplyr::distinct() |> # removes duplicates from the same group (!= all dupes)
+    dplyr::filter(.data$group != "no") |> # removes zeros
+    dplyr::pull(.data$summed) # extract the vector
 
   return(summed_vector)
 }

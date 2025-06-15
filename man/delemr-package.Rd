@@ -8,7 +8,7 @@
 \description{
 \if{html}{\figure{logo.png}{options: style='float: right' alt='logo' width='120'}}
 
-Miscellaneous R functions developed in my personal projects. The functions here only have in common that they have been useful to me at some point, but they should be well documented if you're curious about them.
+Miscellaneous R functions developed in my personal projects. The functions here only have in common that they have been useful to me at some point.
 }
 \seealso{
 Useful links:
